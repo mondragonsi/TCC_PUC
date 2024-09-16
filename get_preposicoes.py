@@ -237,10 +237,10 @@ def analyze_general_documents(document_analysis_client, pdf_bytes):
         # Extrair o conteúdo do texto do resultado
         text_content = ""
         for page in result.pages:
-            #st.write(f"--- Analisando página #{page.page_number} ---")
-            #st.write(
-                f"A página tem largura: {page.width} e altura: {page.height}, medida em unidades: {page.unit}"
-            )
+            # st.write(f"--- Analisando página #{page.page_number} ---")
+            # st.write(
+            #     f"A página tem largura: {page.width} e altura: {page.height}, medida em unidades: {page.unit}"
+            # )
             for line_idx, line in enumerate(page.lines):
                 #st.write(f"Linha #{line_idx}: '{line.content}'")
                 text_content += line.content + "\n"
