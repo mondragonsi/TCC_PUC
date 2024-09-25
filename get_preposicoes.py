@@ -26,23 +26,23 @@ def main():
     st.title("Consulta de Proposições - Câmara dos Deputados")
     st.write("Digite os parâmetros da proposição que deseja consultar:")
     
-    # Lista pré-definida de 'siglaTipo's
+    # Lista pré-definida de 'sigla_tipo's
     sigla_tipos = ['PL', 'PEC', 'MPV', 'PDC', 'PDL', 'PLC', 'PLP', 'REQ', 'MSC', 'INC', 'EMC', 'REC']
     
     # Coletar entrada do usuário dentro de um formulário
     with st.form(key='consulta_form'):
         numero = st.number_input("Digite o número da proposição:", min_value=1, value=1)
         ano = st.number_input("Digite o ano da proposição:", min_value=1900, max_value=2100, value=2023)
-        siglaTipo = st.selectbox("Selecione a sigla do tipo da proposição:", sigla_tipos)
+        sigla_tipo = st.selectbox("Selecione a sigla do tipo da proposição:", sigla_tipos)
         submit_button = st.form_submit_button(label='Consultar')
     
     if submit_button:
-        consulta_proposicao(numero, ano, siglaTipo)
+        consulta_proposicao(numero, ano, sigla_tipo)
 
     # Exibir detalhes da proposição e PDF se disponível
     display_proposicao()
 
-def consulta_proposicao(numero, ano, siglaTipo):
+def consulta_proposicao(numero, ano, sigla_tipo):
     with st.spinner('Consultando proposições...'):
         params = {
             "ordem": "ASC",
@@ -50,7 +50,7 @@ def consulta_proposicao(numero, ano, siglaTipo):
             "itens": 10,
             "numero": int(numero),
             "ano": int(ano),
-            "siglaTipo": siglaTipo,
+            "sigla_tipo": sigla_tipo,
         }
 
         # Buscar proposições
@@ -96,7 +96,7 @@ def display_proposicao():
         # Exibir detalhes da proposição
         id_proposicao = selected_proposicao.get("id", "N/A")
         uri_proposicao = selected_proposicao.get("uri", "N/A")
-        sigla_tipo = selected_proposicao.get("siglaTipo", "N/A")
+        sigla_tipo = selected_proposicao.get("sigla_tipo", "N/A")
         cod_tipo = selected_proposicao.get("codTipo", "N/A")
         numero_proposicao = selected_proposicao.get("numero", "N/A")
         ano_proposicao = selected_proposicao.get("ano", "N/A")
