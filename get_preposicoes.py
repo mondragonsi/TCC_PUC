@@ -26,7 +26,7 @@ def main():
     st.title("Consulta de Proposições - Câmara dos Deputados")
     st.write("Digite os parâmetros da proposição que deseja consultar:")
     
-    # Lista pré-definida de 'sigla_tipo's
+    # Lista pré-definida de 'siglaTipo's
     sigla_tipos = ['PL', 'PEC', 'MPV', 'PDC', 'PDL', 'PLC', 'PLP', 'REQ', 'MSC', 'INC', 'EMC', 'REC']
     
     # Coletar entrada do usuário dentro de um formulário
@@ -50,7 +50,7 @@ def consulta_proposicao(numero, ano, sigla_tipo):
             "itens": 10,
             "numero": int(numero),
             "ano": int(ano),
-            "sigla_tipo": sigla_tipo,
+            "siglaTipo": sigla_tipo,
         }
 
         # Buscar proposições
@@ -96,7 +96,7 @@ def display_proposicao():
         # Exibir detalhes da proposição
         id_proposicao = selected_proposicao.get("id", "N/A")
         uri_proposicao = selected_proposicao.get("uri", "N/A")
-        sigla_tipo = selected_proposicao.get("sigla_tipo", "N/A")
+        sigla_tipo = selected_proposicao.get("siglaTipo", "N/A")
         cod_tipo = selected_proposicao.get("codTipo", "N/A")
         numero_proposicao = selected_proposicao.get("numero", "N/A")
         ano_proposicao = selected_proposicao.get("ano", "N/A")
