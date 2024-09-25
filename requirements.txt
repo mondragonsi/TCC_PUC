@@ -3,3 +3,6 @@ requests
 webbrowser
 re
 openai
+io
+python-dotenv
+datetime
