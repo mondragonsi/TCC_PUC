@@ -1,6 +1,5 @@
 streamlit
 requests
-pycopy-webbrowser
 re
 openai
 io
