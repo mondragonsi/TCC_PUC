@@ -1,7 +1,5 @@
 streamlit
 requests
-re
 openai
-io
 python-dotenv
 datetime
