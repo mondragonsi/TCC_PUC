@@ -125,7 +125,7 @@ def display_proposicao():
 
             # Exibir o PDF dentro do app
             st.write("Visualização do Inteiro Teor:")
-            pdf_response = requests.get(url_inteiro_teor)
+            pdf_response = requests.get(url_inteiro_teor, timeout=10)
             if pdf_response.status_code == 200:
                 pdf_bytes = pdf_response.content
 
@@ -138,7 +138,7 @@ def display_proposicao():
                 # Incorporar PDF em HTML
                 pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf"></iframe>'
 
-                st.markdown(pdf_display, unsafe_allow_html=True)
+                st.markdown(pdf_display, unsafe_allow_html=False)
 
                 # Botão "Resumir com IA" na tela principal
                 resumir_button_clicked = st.button("Resumir com IA")
