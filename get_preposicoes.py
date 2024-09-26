@@ -138,7 +138,7 @@ def display_proposicao():
                 # Incorporar PDF em HTML
                 pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf"></iframe>'
 
-                st.write(pdf_display, unsafe_allow_html=True)
+                st.markdown(pdf_display, unsafe_allow_html=True)
 
                 # Botão "Resumir com IA" na tela principal
                 resumir_button_clicked = st.button("Resumir com IA")
