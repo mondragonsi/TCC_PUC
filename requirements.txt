@@ -3,4 +3,5 @@ requests
 openai
 python-dotenv
 datetime
-azure
+azure-ai-formrecognizer
+azure-ai-formrecognizer
