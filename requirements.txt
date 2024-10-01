@@ -5,3 +5,9 @@ python-dotenv
 datetime
 azure-ai-formrecognizer
 azure-ai-formrecognizer
+ipykernel
+langchain
+langchain-community
+langchain-openai
+pypdf
+faiss-cpu
