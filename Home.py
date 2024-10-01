@@ -6,7 +6,7 @@ from langchain.memory import ConversationBufferMemory
 
 FILES_FOLDER = Path(__file__).parent / "files"
 
-def create_chain_chat():
+def create_chain_chat() -> None:
     st.session_state.chain = True
     
     
