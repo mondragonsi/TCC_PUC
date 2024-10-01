@@ -20,7 +20,7 @@ def create_chain_chat():
 
 def sidebar():
     """ Sidebar for navigation Everything ran here will be executed in the sidebar"""
-    st.sidebar.title("Proposições Políticas em PDF")
+    st.sidebar.title("Proposições Políticas")
     uploaded_pdfs = st.file_uploader("Adicione as preoposições em PDF aqui",
                      type=".pdf", 
                      key="pdf_file",
