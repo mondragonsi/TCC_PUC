@@ -1,22 +1,7 @@
-import streamlit as st
-from pathlib import Path
 import time
-from langchain.memory import ConversationBufferMemory
+import streamlit as st
+from utils import create_chain_chat, FILES_FOLDER
 
-
-FILES_FOLDER = Path(__file__).parent / "files"
-
-def create_chain_chat() -> None:
-    st.session_state.chain = True
-    
-    
-    memory = ConversationBufferMemory(return_messages=True)
-    memory.chat_memory.add_user_message('Olá! Sou Usuario! :)')
-    memory.chat_memory.add_ai_message('Olá! Como posso te ajudar? Sou uma LLM :)')
-    st.session_state.memory = memory
-    
-    time.sleep(1)
-    pass
 
 def sidebar():
     """ Sidebar for navigation Everything ran here will be executed in the sidebar"""
@@ -51,11 +36,11 @@ def chat_window():
         st.error("Nenhum chatbot foi iniciado. Adicione um arquivo PDF para iniciar o chatbot.")
         st.stop() # Stop the script here
         
-    # chain = st.session_state.chain
-    # memory = st.session_state.memory
+    chain = st.session_state.chat_chain
+    memory = st.session_state.memory
     
     memory = st.session_state.memory
-    messages = memory.load_memory_variables({})['history']
+    messages = memory.load_memory_variables({})['chat_history']
     
     container = st.container()
     for message in messages:
@@ -70,9 +55,8 @@ def chat_window():
         chat = container.chat_message("ai")
         chat.markdown('gerando resposta...')
         
-        time.sleep(2)
-        memory.chat_memory.add_user_message(new_message)
-        memory.chat_memory.add_ai_message('OI SOU O CHATBOT LLM aqui de novo!')
+        chain.invoke({'question': new_message})
+        time.sleep(1)
         st.rerun()
         
         

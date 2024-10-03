@@ -1,4 +1,6 @@
 from pathlib import Path
+
+import streamlit as st
 from langchain_community.document_loaders.pdf import PyPDFLoader
 from langchain_community.vectorstores.faiss import FAISS
 from langchain.memory import ConversationBufferMemory
@@ -7,7 +9,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_openai.embeddings import OpenAIEmbeddings
 from langchain_openai.chat_models import ChatOpenAI
 
-FILES_FOLDER = Path('/Users/mondragon/MDS_GITHUB/TCC_PUC/teste.ipynb').parent / "files"
+FILES_FOLDER = Path(__file__).parent / "files"
 MODEL_NAME = "gpt-4o-mini"
 
 def document_importer():
@@ -48,29 +50,35 @@ def create_vector_store(documents):
     return vector_store
 
 
-def create_chain_chat(vector_store):
-    chat = ChatOpenAI(model_name=MODEL_NAME)
-    memory = ConversationBufferMemory(return_messages=True)
-
-    retriever = vector_store.as_retriever()
-    chat_chain = ConversationalRetrievalChain.from_llm(
-        llm=chat,
-        memory=memory,
-        retriever=retriever,
-        return_source_documents=True,
-        verbose=True
-    )
-    return chat_chain
-
-
-if __name__ == "__main__":
+def create_chain_chat():
+    
     # Run the functions
     documents = document_importer()
     print(f"Number of documents imported: {len(documents)}")
     documents = split_documents(documents)
     print(f"Number of documents after splitting: {len(documents)}")
+    
     if documents:
         vector_store = create_vector_store(documents)
-        chat_chain = create_chain_chat(vector_store)
-    else:
-        print("Cannot create vector store and chat chain without documents.")
+        chat = ChatOpenAI(model_name=MODEL_NAME)
+        memory = ConversationBufferMemory(
+            return_messages=True,
+            memory_key='chat_history',
+            output_key='answer',
+        )
+
+        retriever = vector_store.as_retriever()
+        chat_chain = ConversationalRetrievalChain.from_llm(
+            llm=chat,
+            memory=memory,
+            retriever=retriever,
+            return_source_documents=True,
+            verbose=True
+        )
+        st.session.state.chat_chain = chat_chain
+    print("Cannot create vector store and chat chain without documents.")
+    return None
+        
+        
+    
+    
