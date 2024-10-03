@@ -79,7 +79,10 @@ def create_chain_chat():
             return_source_documents=True,
             verbose=True
         )
-        st.session.state.chat_chain = chat_chain
+        # Save the chain to the session state
+        st.session_state['chain'] = chat_chain
+        
+        
     print("Cannot create vector store and chat chain without documents.")
     return None
         

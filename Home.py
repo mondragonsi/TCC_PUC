@@ -36,10 +36,9 @@ def chat_window():
         st.error("Nenhum chatbot foi iniciado. Adicione um arquivo PDF para iniciar o chatbot.")
         st.stop() # Stop the script here
         
-    chain = st.session_state.chat_chain
-    memory = st.session_state.memory
+    chain = st.session_state['chain']
+    memory = chain.memory
     
-    memory = st.session_state.memory
     messages = memory.load_memory_variables({})['chat_history']
     
     container = st.container()
