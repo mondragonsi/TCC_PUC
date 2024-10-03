@@ -9,6 +9,10 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_openai.embeddings import OpenAIEmbeddings
 from langchain_openai.chat_models import ChatOpenAI
 
+from dotenv import load_dotenv, find_dotenv
+
+_ = load_dotenv(find_dotenv())
+
 FILES_FOLDER = Path(__file__).parent / "files"
 MODEL_NAME = "gpt-4o-mini"
 
