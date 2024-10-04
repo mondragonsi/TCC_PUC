@@ -52,7 +52,7 @@ def chat_window():
         chat.markdown(new_message)
         
         chat = container.chat_message("ai")
-        chat.markdown('gerando resposta...')
+        chat.markdown('digitando...')
         
         chain.invoke({'question': new_message})
         time.sleep(1)
